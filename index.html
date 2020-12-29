@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.PageTitle}}</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            background-color: rgb(223, 219, 219);
+        }
+        #root{
+            height: 100vh;
+            
+        }
+        .form-input{
+            display: flex;
+            justify-content: center;
+            flex: 60%;
+            margin-top: 50px;
+        }
+        .form-input form{
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            justify-content: center;
+            width: 50%;
+            font-size: 14px;
+
+        }
+        form .input-title,
+        form .btn-submit{
+            border: 1px solid rgb(29, 28, 28);
+            outline: 0;
+            height: 30px;
+            background-color: whitesmoke;
+            padding-left: 12px;
+            color: black;
+            border-radius: 3px;
+            font-size: inherit;
+        }
+        form .btn-submit{
+            background-color: rgb(6, 101, 179);
+            cursor: pointer;
+        }
+
+        form textarea{
+            border: 1px solid rgb(29, 28, 28);
+            outline: 0;
+            background-color: whitesmoke;
+            padding: 12px;
+            color: black;
+            border-radius: 3px;
+            font-size: inherit;
+        }
+        .wrap-list-todo{
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            border-top: 2px solid grey;
+            padding-top: 16px;
+        }
+        .list-todo{
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+        .todo-item{
+            background: rgb(247, 243, 243);
+            border-radius: 3px;
+            margin-bottom: 4px;
+            padding: 8px;
+            min-height: 50px;
+            text-align: center;
+        }
+        .todo-item-title{
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: capitalize;
+            margin-bottom: 2px;
+        }
+        .todo-item-title,
+        .todo-item-content{
+            background: rgb(247, 243, 243);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="form-input">
+            <form action="/add-todo" method="post">
+                <input class="input-title" type="text" placeholder="enter title" name="title">
+                <textarea name="content" placeholder="enter content" cols="30" rows="10"></textarea>
+                <input class="btn-submit" type="submit">
+            </form>
+        </div>
+        <div class="wrap-list-todo">
+            {{if not .PageTodos}}
+                <div>Empty Todos</div>
+            {{else}}
+                <div class="list-todo">
+                    {{range .PageTodos}}
+                        <div class="todo-item">
+                            <div class="todo-item-title">{{.Title}}</div>
+                            <div class="todo-item-content">{{.Content}}</div>
+                        </div>
+                    {{end}}
+                </div>
+            {{end}}
+        </div>
+    </div>
+</body>
+</html>
